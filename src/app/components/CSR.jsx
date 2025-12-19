@@ -15,12 +15,25 @@ export default function CSR() {
       });
   }, []);
 
+  if (loading) {
+    return <p className="text-center">Yuklanmoqda...</p>;
+  }
+
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {data.map(({ title, completed }) => (
-        <div key={title}>
-          <h2 className="font-bold">{title}</h2>
-          <p>{completed ? "Rost" : "Yolg'on"}</p>
+        <div
+          key={title}
+          className="border rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition"
+        >
+          <h2 className="font-semibold text-lg">{title}</h2>
+          <p
+            className={`mt-1 text-sm font-medium ${
+              completed ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {completed ? "Rost" : "Yolg'on"}
+          </p>
         </div>
       ))}
     </div>

@@ -2,17 +2,23 @@ export default async function SSG() {
   const req = await fetch("https://jsonbek.uz/api/todos", {
     cache: "force-cache",
   });
+
   const data = await req.json();
+
   return (
-    <div>
-      {data.map(({ title, completed }) => {
-        return (
-          <div key={title}>
-            <h2 className="font-bold ">{title}</h2>
-            <p>{completed ? "Rost" : "Yolg'on"}</p>
-          </div>
-        );
-      })}
+    <div className="grid gap-4">
+      {data.map(({ title, completed }) => (
+        <div key={title} className="border rounded-lg p-4 shadow-sm bg-white">
+          <h2 className="font-semibold">{title}</h2>
+          <p
+            className={`mt-1 text-sm ${
+              completed ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {completed ? "Rost" : "Yolg'on"}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
